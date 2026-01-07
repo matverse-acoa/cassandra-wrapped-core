@@ -79,7 +79,7 @@ def main():
     logger = logging.getLogger(__name__)
 
     # Verifica se deve exibir ajuda
-    if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h"]:
+    if any(arg in ("--help", "-h") for arg in sys.argv[1:]):
         print(CLI_HELP)
         return
 
