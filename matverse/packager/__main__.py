@@ -98,6 +98,10 @@ def main():
     except ImportError as e:
         logger.error("Não foi possível importar o empacotador Android.")
         logger.error(f"Detalhes: {e}")
+        logger.error(
+            "Verifique se o pacote MatVerse está instalado ou execute via "
+            "`python -m matverse.packager` a partir da raiz do repositório."
+        )
         sys.exit(1)
     except FileNotFoundError as e:
         logger.error(f"Ferramenta não encontrada: {e}")
