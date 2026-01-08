@@ -1,7 +1,4 @@
 const focusButton = document.querySelector("[data-action='toggle']");
-const primaryAction = document.querySelector(".primary");
-const secondaryAction = document.querySelector(".secondary");
-
 const scrollToSection = (selector) => {
   const section = document.querySelector(selector);
   if (!section) {
@@ -17,10 +14,11 @@ focusButton?.addEventListener("click", () => {
     : "Modo Foco";
 });
 
-primaryAction?.addEventListener("click", () => {
-  scrollToSection("#overview");
-});
-
-secondaryAction?.addEventListener("click", () => {
-  scrollToSection("#metrics");
+document.querySelectorAll("[data-target]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const target = button.getAttribute("data-target");
+    if (target) {
+      scrollToSection(target);
+    }
+  });
 });

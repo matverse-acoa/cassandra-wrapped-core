@@ -154,6 +154,76 @@ body {
   gap: 20px;
 }
 
+.holistic-grid,
+.layers-grid,
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.holistic-card,
+.layers-card,
+.status-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.holistic-card h3,
+.layers-card h3,
+.status-card h3 {
+  margin-bottom: 10px;
+}
+
+.holistic-card ul {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.flow-list {
+  display: grid;
+  gap: 12px;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.status-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  border: 1px solid transparent;
+}
+
+.status-label.prod {
+  color: #16a34a;
+  border-color: rgba(22, 163, 74, 0.4);
+}
+
+.status-label.mvp {
+  color: #f97316;
+  border-color: rgba(249, 115, 22, 0.4);
+}
+
+.status-label.prototype {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.status-label.concept {
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.4);
+}
+
 .layer-card {
   background: var(--panel);
   border: 1px solid var(--border);

@@ -22,13 +22,62 @@
           organizado em coerência, pilares e métricas, pronto para expansão orgânica.
         </p>
         <div class="hero-actions">
-          <button class="primary">Explorar camadas</button>
-          <button class="secondary">Abrir manifesto</button>
+          <button class="primary" type="button" data-target="#holistic">Ver arquitetura holística</button>
+          <button class="secondary" type="button" data-target="#layers">Camadas funcionais</button>
         </div>
       </div>
     </header>
 
     <main>
+      <section class="section" id="holistic">
+        <div class="section-header">
+          <h2>Arquitetura holística MatVerse</h2>
+          <p>Do núcleo ontológico ao ecossistema externo, com WebX como espinha dorsal operacional.</p>
+        </div>
+        <div class="holistic-grid">
+          <article class="holistic-card">
+            <h3>Núcleo ontológico</h3>
+            <ul>
+              <li>Variante · Variância · Invariância</li>
+              <li>Vo + Vs → Coerência</li>
+            </ul>
+          </article>
+          <article class="holistic-card">
+            <h3>Espinha dorsal WebX</h3>
+            <ul>
+              <li>Ω-Gate</li>
+              <li>Ledger append-only</li>
+              <li>Métricas Ω/Ψ</li>
+              <li>Estado Live/Quarantine/Block</li>
+            </ul>
+          </article>
+          <article class="holistic-card">
+            <h3>Organismo MatVerse</h3>
+            <ul>
+              <li>Governança (CANON, OHASH, RELEASE)</li>
+              <li>Evidência (Manifest, Receipts)</li>
+              <li>Core (API, P2P, Auditoria, PQC)</li>
+            </ul>
+          </article>
+          <article class="holistic-card">
+            <h3>Ponte TwinLab ↔ WebX</h3>
+            <ul>
+              <li>Contracts / Experiment Receipt</li>
+              <li>POST /api/v1/ingest</li>
+              <li>Retorna OHASH + Evidence</li>
+            </ul>
+          </article>
+          <article class="holistic-card">
+            <h3>Ecossistema</h3>
+            <ul>
+              <li>HuggingFace · GitHub</li>
+              <li>Polygon Anchoring</li>
+              <li>APK Android</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
       <section class="section" id="overview">
         <div class="section-header">
           <h2>Mapa sistêmico</h2>
@@ -56,6 +105,43 @@
             <h3>3 · Pilares</h3>
             <p>Governança, Ciência, Engenharia e Economia como órgãos vivos.</p>
             <span class="tag">4 pilares</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="layers">
+        <div class="section-header">
+          <h2>Camadas funcionais</h2>
+          <p>Pipeline de soberania até integração, mantendo coerência e rastreabilidade em cada etapa.</p>
+        </div>
+        <div class="layers-grid">
+          <article class="layers-card">
+            <h3>Camada 0 · Soberania</h3>
+            <p>CANON, OHASH e GOVERNANCE definem a identidade do sistema.</p>
+          </article>
+          <article class="layers-card">
+            <h3>Camada 1 · Evidência</h3>
+            <p>Manifest, receipts e ledger verificáveis.</p>
+          </article>
+          <article class="layers-card">
+            <h3>Camada 2 · Operações</h3>
+            <p>Docker, CI/CD, Makefile e observabilidade.</p>
+          </article>
+          <article class="layers-card">
+            <h3>Camada 3 · Core</h3>
+            <p>Gate, state, ledger e métricas Ω/Ψ.</p>
+          </article>
+          <article class="layers-card">
+            <h3>Camada 4 · Extensões</h3>
+            <p>Blockchain, IPFS, PQC, Packager.</p>
+          </article>
+          <article class="layers-card">
+            <h3>Camada 5 · MAM</h3>
+            <p>CIA, CAM e observability para adaptação.</p>
+          </article>
+          <article class="layers-card">
+            <h3>Camada 6 · Bridge</h3>
+            <p>Transferência e contratos de acoplamento.</p>
           </article>
         </div>
       </section>
@@ -181,6 +267,49 @@
           <div class="timeline-step">
             <span>Tradutores de contexto</span>
             <p>Convertem domínios sem perder semântica.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="flow">
+        <div class="section-header">
+          <h2>Fluxo operacional</h2>
+          <p>Do TwinLab à validação Ω-Gate, com geração de receipts e ancoragem de evidência.</p>
+        </div>
+        <ol class="flow-list">
+          <li>TwinLab gera simulação + métricas iniciais.</li>
+          <li>POST /api/v1/ingest envia receipt para WebX.</li>
+          <li>Ω-Gate valida schema, assinatura e thresholds.</li>
+          <li>Ledger registra evidência com OHASH.</li>
+          <li>Anchoring publica merkle root.</li>
+        </ol>
+      </section>
+
+      <section class="section" id="status">
+        <div class="section-header">
+          <h2>Status por camada</h2>
+          <p>Visibilidade rápida sobre maturidade e cobertura OHASH.</p>
+        </div>
+        <div class="status-grid">
+          <div class="status-card">
+            <span class="status-label prod">PROD</span>
+            <h3>Soberania · Evidência</h3>
+            <p>CANON, OHASH, Manifest e Receipts completos.</p>
+          </div>
+          <div class="status-card">
+            <span class="status-label mvp">MVP</span>
+            <h3>Extensões</h3>
+            <p>Blockchain, IPFS, PQC e Packager.</p>
+          </div>
+          <div class="status-card">
+            <span class="status-label prototype">PROTOTYPE</span>
+            <h3>MAM</h3>
+            <p>CIA/CAM em evolução com observability.</p>
+          </div>
+          <div class="status-card">
+            <span class="status-label concept">CONCEPT</span>
+            <h3>Expansões futuras</h3>
+            <p>Fullstack e automações adicionais.</p>
           </div>
         </div>
       </section>
