@@ -1,0 +1,78 @@
+name: Sync WebX Artifact to Hugging Face
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+env:
+  HF_REPO_ID: "MatverseHub/WebX"
+  HF_REPO_TYPE: "dataset"
+  ARTIFACT_NAME: "webx-fullstack.zip"
+  ARTIFACT_DIR: "artifacts"
+
+jobs:
+  build-and-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Prepare artifact
+        run: |
+          mkdir -p "$ARTIFACT_DIR"
+          zip -r "$ARTIFACT_DIR/$ARTIFACT_NAME" . \
+            -x ".git/*" \
+            -x "$ARTIFACT_DIR/*"
+
+      - name: Install Hugging Face Hub
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install --upgrade huggingface_hub
+
+      - name: Upload artifact to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_API_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from huggingface_hub import HfApi
+
+          repo_id = os.environ["HF_REPO_ID"]
+          repo_type = os.environ["HF_REPO_TYPE"]
+          artifact_dir = os.environ["ARTIFACT_DIR"]
+          artifact_name = os.environ["ARTIFACT_NAME"]
+          artifact_path = f"{artifact_dir}/{artifact_name}"
+
+          api = HfApi(token=os.environ["HF_TOKEN"])
+          api.upload_file(
+              path_or_fileobj=artifact_path,
+              path_in_repo=f"artifacts/{artifact_name}",
+              repo_id=repo_id,
+              repo_type=repo_type,
+              commit_message=f"CI sync: add {artifact_name}",
+          )
+          print(f"Uploaded {artifact_path} to {repo_id}")
+          PY
+
+      - name: List Hugging Face files
+        env:
+          HF_TOKEN: ${{ secrets.HF_API_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from huggingface_hub import HfApi
+
+          api = HfApi(token=os.environ["HF_TOKEN"])
+          files = api.list_repo_files(
+              repo_id=os.environ["HF_REPO_ID"],
+              repo_type=os.environ["HF_REPO_TYPE"],
+          )
+          print("Files in dataset:")
+          for path in files:
+              print(f" - {path}")
+          PY
