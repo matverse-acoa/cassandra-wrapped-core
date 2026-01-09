@@ -60,10 +60,22 @@ static double shannon_entropy(const char *s, size_t len) {
     return h / 8.0; /* normalizado [0,1] */
 }
 
+static const char *bounded_search(const char *s, size_t len, const char *pattern) {
+    size_t pattern_len = strlen(pattern);
+    if (pattern_len == 0 || pattern_len > len) {
+        return NULL;
+    }
+    for (size_t i = 0; i + pattern_len <= len; i++) {
+        if (memcmp(s + i, pattern, pattern_len) == 0) {
+            return s + i;
+        }
+    }
+    return NULL;
+}
+
 static int contains_pattern(const char *s, size_t len, const char **patterns) {
-    (void)len;
     for (int i = 0; patterns[i] != NULL; i++) {
-        if (strstr(s, patterns[i]) != NULL) {
+        if (bounded_search(s, len, patterns[i]) != NULL) {
             return 1;
         }
     }
@@ -71,13 +83,17 @@ static int contains_pattern(const char *s, size_t len, const char **patterns) {
 }
 
 static double count_coercion(const char *s, size_t len) {
-    (void)len;
     int count = 0;
     for (int i = 0; COERCION_WORDS[i] != NULL; i++) {
-        const char *p = s;
-        while ((p = strstr(p, COERCION_WORDS[i])) != NULL) {
-            count++;
-            p++;
+        const char *pattern = COERCION_WORDS[i];
+        size_t pattern_len = strlen(pattern);
+        if (pattern_len == 0 || pattern_len > len) {
+            continue;
+        }
+        for (size_t offset = 0; offset + pattern_len <= len; offset++) {
+            if (memcmp(s + offset, pattern, pattern_len) == 0) {
+                count++;
+            }
         }
     }
     return (double)count / 5.0; /* normalizado */
