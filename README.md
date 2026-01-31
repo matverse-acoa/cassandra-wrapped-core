@@ -1,32 +1,60 @@
-# PBSE Kernel v0.1 (REAL)
+# cassandra-wrapped-core — PBSE Kernel
 
-Kernel normativo determinístico: PASS/BLOCK/SILENCE/ESCALATE + SHA3-256 ledger chain.
+Este repositório implementa o **kernel normativo** do MatVerse.
 
-## Compilar (native)
-```bash
-cc -O2 -std=c99 -Isrc -Iinclude src/tiny_sha3.c src/pbse_kernel.c src/pbse_cli.c -o pbse_cli -lm
-```
+O PBSE (Policy-Based Sovereign Execution) é um motor de decisão
+**determinístico, mínimo e impessoal**.
 
-## Rodar (native)
-```bash
-./pbse_cli --input-hash 00...00 --prev-root 11...11 --unix-ns 1700000000000000000 --run-id 1 \
-  --flags 0 --phi 0.9 --omega 0.9 --theta 0.9 --phi-min 0.77 --omega-min 0.70 --theta-min 0.75
-```
+Ele decide apenas:
 
-## Rodar (python reference)
-```bash
-python3 python/pbse_cli.py --input-hash 00...00 --prev-root 11...11 --unix-ns 1700000000000000000 --run-id 1 \
-  --flags 0 --phi 0.9 --omega 0.9 --theta 0.9 --phi-min 0.77 --omega-min 0.70 --theta-min 0.75 --json
-```
+PASS | BLOCK | SILENCE | ESCALATE
 
-## Validar vetores ouro
-```bash
-python3 tests/test_vectors.py
-```
+Com base em métricas fornecidas externamente.
 
-Record canônico (148 bytes):
-- record_hash = SHA3-256(record)
-- new_root    = SHA3-256(prev_root || record_hash)
+---
 
-Host rules: ver `HOST_CONTRACT.md`.
+## O que este repositório faz
 
+- Aplica regras normativas fixas
+- Gera registros canônicos encadeados por hash
+- Produz decisões sem override humano
+- Opera como kernel compilável (C / WASM / Python reference)
+
+---
+
+## O que este repositório NÃO faz
+
+- Não mede Ψ, Ω ou CVaR
+- Não executa ações
+- Não mantém estado de mundo
+- Não acessa rede
+- Não interpreta intenção
+
+---
+
+## Regime Arquitetural
+
+**REGIME: KERNEL**
+
+Este código é deliberadamente:
+- pequeno
+- previsível
+- restritivo
+
+Complexidade aqui é defeito.
+
+---
+
+## Propriedades
+
+- Fail-closed por construção
+- Ledger encadeado (SHA3-256)
+- Vetores de teste determinísticos
+- ABI estável
+
+---
+
+## Regra Fundamental
+
+O kernel **julga**.
+Ele não explica, não executa e não corrige.
